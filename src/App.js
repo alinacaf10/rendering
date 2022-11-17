@@ -4,9 +4,9 @@ import { ClientCard } from "./ClientCard";
 import { fetchClients } from "./fetchClients";
 
 class App extends React.Component {
-    state = {
-      client: null,
-    }
+  state = {
+    client: {}
+  };
 
   componentDidMount = () => {
     fetchClients().then((client) => {
@@ -16,11 +16,19 @@ class App extends React.Component {
     });
   };
   render() {
-    return(
+    if (ClientCard === null) {
+      return null;
+    }
+
+    return (
       <>
-      <ClientCard/>
+        <ClientCard
+          name={this.state.client.name}
+          phone={this.state.client.phone}
+          card={this.state.client.card}
+        />
       </>
-    )
+    );
   }
 }
 
